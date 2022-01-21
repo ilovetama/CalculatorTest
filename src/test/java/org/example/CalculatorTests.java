@@ -1,60 +1,83 @@
 package org.example;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-  public class CalculatorTests {
+public class CalculatorTests {
 
-    private Calculator calculator;
+  private Calculator calculator;
 
-    @BeforeEach
-    void setUp() {
-      calculator = new Calculator();
-    }
-
-    @Test
-    void addTwoPositiveNumbers() {
-      double a = 10.137;
-      double b = 6.314;
-      double actualResult = calculator.add(a, b);
-      double expectedResult = 16.45;
-      Assertions.assertEquals(expectedResult, actualResult, "Wrong result of method 'add'");
-    }
-
-    @Test
-    void divideTwoPositiveNumbers() {
-      double a = 10.1;
-      double b = 0;
-      double actualResult = calculator.divide(a, b);
-      double expectedResult = 1.6;
-      Assertions.assertEquals(expectedResult, actualResult, "Wrong result of method 'divide'");
-    }
-
-    @Test
-    void multiplyTwoPositiveNumbers() {
-      double a = 10.1;
-      double b = 6.3;
-      double actualResult = calculator.multiply(a, b);
-      double expectedResult = 63.63;
-      Assertions.assertEquals(expectedResult, actualResult, "Wrong result of method 'multiply'");
-    }
-
-    @Test
-    void subtractTwoPositiveNumbers() {
-      double a = 10.1;
-      double b = 6.3;
-      double actualResult = calculator.subtract(a, b);
-      double expectedResult = 3.8;
-      Assertions.assertEquals(expectedResult, actualResult, "Wrong result of method 'subtract'");
-    }
-
-    @Test
-    void addTwoPositiveNumbersWithTwoSymbolsPrecision() {
-      double a = 10.1;
-      double b = 6.354;
-      double actualResult = calculator.add(a, b);
-      double expectedResult = 16.45;
-      Assertions.assertEquals(expectedResult, actualResult, "Wrong result of method 'add'");
-    }
+  @BeforeEach
+  void setUp() {
+    calculator = new Calculator();
   }
+
+  @ParameterizedTest
+  @MethodSource("addData")
+  void addNumbers(double a, double b, double result) {
+    double actualResult = calculator.add(a, b);
+    assertEquals(result, actualResult, 0.01);
+  }
+
+  @ParameterizedTest
+  @MethodSource("subtractData")
+  void subtractNumbers(double a, double b, double result) {
+    double actualResult = calculator.subtract(a, b);
+    assertEquals(result, actualResult, 0.01);
+  }
+
+  @ParameterizedTest
+  @MethodSource("multiplyData")
+  void multiplyNumbers(double a, double b, double result) {
+    double actualResult = calculator.multiply(a, b);
+    assertEquals(result, actualResult, 0.01);
+  }
+
+  @ParameterizedTest
+  @MethodSource("divideData")
+  void divideNumbers(double a, double b, double result) {
+    double actualResult = calculator.divide(a, b);
+    assertEquals(result, actualResult, 0.01);
+  }
+
+  private static Stream<Arguments> addData() {
+    return Stream.of(
+        Arguments.of(2.82, 3.93, 6.75),
+        Arguments.of(-3.12, 2.06, -1.06),
+        Arguments.of(0.01, 0.09, 0.1)
+    );
+  }
+
+  private static Stream<Arguments> subtractData() {
+    return Stream.of(
+        Arguments.of(2.82, 3.93, -1.11),
+        Arguments.of(3.12, 2.06, 1.06),
+        Arguments.of(-3.12, 2.06, -5.18),
+        Arguments.of(0.01, 0.09, -0.08)
+    );
+  }
+
+  private static Stream<Arguments> multiplyData() {
+    return Stream.of(
+        Arguments.of(2.82, 3.93, 11.08),
+        Arguments.of(-3.12, 2.06, -6.43),
+        Arguments.of(-3.12, -2.06, 6.43),
+        Arguments.of(0, 0.09, 0)
+    );
+  }
+
+  private static Stream<Arguments> divideData() {
+    return Stream.of(
+        Arguments.of(2.82, 3.93, 0.72),
+        Arguments.of(-3.12, 2.06, -1.51),
+        Arguments.of(0.01, 0, "Division by zero is not allowed")
+    );
+  }
+
+
+}
