@@ -1,9 +1,11 @@
 package org.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -45,6 +47,14 @@ public class CalculatorTests {
     assertEquals(result, actualResult, 0.01);
   }
 
+  @Test
+  void divideByZero() {
+    Exception exception = assertThrows(ArithmeticException.class, () ->
+        calculator.divide(1, 0));
+    assertEquals("Division by zero is not allowed", exception.getMessage());
+    System.out.println(exception.getMessage());
+  }
+
   private static Stream<Arguments> addData() {
     return Stream.of(
         Arguments.of(2.82, 3.93, 6.75),
@@ -75,9 +85,8 @@ public class CalculatorTests {
     return Stream.of(
         Arguments.of(2.82, 3.93, 0.72),
         Arguments.of(-3.12, 2.06, -1.51),
-        Arguments.of(0.01, 0, "Division by zero is not allowed")
+        Arguments.of(-3.12, -2.06, 1.51)
     );
   }
-
 
 }
