@@ -4,18 +4,14 @@ import java.util.Scanner;
 
 public class CalculationUtils {
 
-  private static final String NON_SPACE_REGEX = "^[\\S]*$";
-  private static final String SPACE_REGEX = "^[\\s]*$";
-  private static final String ARITHMETIC_SINGS = "^\\S*[-*+/]\\S*$";
+  private static final String ARITHMETIC_SINGS = "[-+*/]";
 
   public static double getNumber() {
     Scanner scanner = new Scanner(System.in);
+    scanner.useDelimiter("\n");
     System.out.println("Enter the number:");
-    if (scanner.hasNextDouble() && scanner.hasNext(NON_SPACE_REGEX)) {
+    if (scanner.hasNextDouble()) {
       return scanner.nextDouble();
-    } else if (scanner.hasNext(SPACE_REGEX)) {      //не понимаю, почему это не работает
-      System.out.println("Enter the number");
-      return getNumber();
     } else {
       System.out.println("Number is incorrect. Try again");
       return getNumber();
@@ -25,6 +21,7 @@ public class CalculationUtils {
   public static char getOperation() {
     System.out.println("Enter the operation (+, -, *, /):");
     Scanner scanner = new Scanner(System.in);
+    scanner.useDelimiter("\n");
     char operation;
     if (scanner.hasNext(ARITHMETIC_SINGS)) {
       operation = scanner.next().charAt(0);

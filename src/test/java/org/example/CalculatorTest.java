@@ -50,7 +50,15 @@ public class CalculatorTest {
 //    Exception exception = assertThrows(ArithmeticException.class, () ->
 //        calculator.divide(1, 0));
 //    assertEquals("Division by zero is not allowed", exception.getMessage());
-//    System.out.println(exception.getMessage());
+//  }
+
+//  @Test
+//  @DisplayName("Division by zero test")
+//  void divideByZero() {
+//    Exception exception = assertThrows( ArithmeticException.class, () ->
+//          calculator.divide(1.0, 0.0));
+//    assertEquals("Division by zero is not allowed", exception.getMessage());
+//    assertTrue(exception.getMessage().contains("Division by zero is not allowed"));
 //  }
 
   private static Stream<Arguments> addData() {
