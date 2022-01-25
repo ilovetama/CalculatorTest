@@ -59,8 +59,8 @@ public class CalculatorTest {
         Arguments.of(2.82, 3.93, 6.75),
         Arguments.of(-3.12, 2.06, -1.06),
         Arguments.of(0.01, 0.09, 0.1),
-        Arguments.of(123, 159, 282)
-
+        Arguments.of(123, 159, 282),
+        Arguments.of(156.165, 981.951, 1138.12)
     );
   }
 
@@ -69,6 +69,7 @@ public class CalculatorTest {
         Arguments.of(2.82, 3.93, -1.11),
         Arguments.of(3.12, 2.06, 1.06),
         Arguments.of(-3.12, 2.06, -5.18),
+        Arguments.of(-951.6516, -1456.5594, 504.91),
         Arguments.of(0.01, 0.09, -0.08)
     );
   }
@@ -78,7 +79,8 @@ public class CalculatorTest {
         Arguments.of(2.82, 3.93, 11.08),
         Arguments.of(-3.12, 2.06, -6.43),
         Arguments.of(-3.12, -2.06, 6.43),
-        Arguments.of(0, 0.09, 0)
+        Arguments.of(1651.5644, 651.6545, 1076249.37),
+        Arguments.of(0, -0.09, 0)
     );
   }
 
@@ -87,7 +89,8 @@ public class CalculatorTest {
         Arguments.of(2.82, 3.93, 0.72),
         Arguments.of(-3.12, 2.06, -1.51),
         Arguments.of(-3.12, -2.06, 1.51),
-        Arguments.of(320, 18, 17.78)
+        Arguments.of(320, 18, 17.78),
+        Arguments.of(651, 894, 0.73)
     );
   }
 
