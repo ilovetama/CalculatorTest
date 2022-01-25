@@ -90,7 +90,10 @@ public class CalculatorTest {
         Arguments.of(-3.12, 2.06, -1.51),
         Arguments.of(-3.12, -2.06, 1.51),
         Arguments.of(320, 18, 17.78),
-        Arguments.of(651, 894, 0.73)
+        Arguments.of(651, 894, 0.73),
+        Arguments.of(651, 0, Double.POSITIVE_INFINITY),
+        Arguments.of(-651, 0, Double.NEGATIVE_INFINITY),
+        Arguments.of(0, 0, Double.NaN)
     );
   }
 
